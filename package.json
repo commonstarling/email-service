@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/commonstarling/email-service#readme",
   "dependencies": {
-    "express": "^4.15.4"
+    "express": "^4.15.4",
+    "sendgrid": "^5.2.2"
   }
 }
