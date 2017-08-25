@@ -15,8 +15,9 @@ console.log('Server listening on port 3000');
 
 app.post('/sendEmail', function(req, res) {
   var fromEmail = new helper.Email(req.body.from);
+  /* Line 19 provides incorrect data for the 'from' email field. Use it in place of line 17 if you'd like to see how the server handles SendGrid errors */
+  //var fromEmail = new helper.Email(req.from);
   var toEmail = new helper.Email(req.body.to);
-  //var toEmail = new helper.Email(req.to);
   var subject = req.body.subject;
   var content = new helper.Content('text/plain', req.body.message);
   var mail = new helper.Mail(fromEmail, subject, toEmail, content);
@@ -26,8 +27,11 @@ app.post('/sendEmail', function(req, res) {
     body: mail.toJSON()
   });
 
+  //Initiate the SendGrid post request
   sg.API(request, function (error, response) {
+    //If there's an error in the SendGrid request
     if (error) {
+      //Initiate a post request through MailGun
       console.log('Error sending through SendGrid, trying MailGun...');
       var data = {
         from: req.body.from,
@@ -44,7 +48,9 @@ app.post('/sendEmail', function(req, res) {
           res.sendStatus(200);
         }
       });
+    //Else if there wasn't an error sending a message through SendGrid
     } else {
+      //Send back a 'success' status code
       console.log('Message successfully sent through SendGrid');
       res.sendStatus(200);
     }
