@@ -4,8 +4,7 @@ var bodyParser = require('body-parser');
 var keys = require('./apiKeys');
 var helper = require('sendgrid').mail;
 var sg = require('sendgrid')(keys.SENDGRID_API_KEY);
-var mailgunDomain = 'mg.sheenamramirez.com';
-var mailgun = require('mailgun-js')({apiKey: keys.MAILGUN_API_KEY, domain: mailgunDomain});
+var mailgun = require('mailgun-js')({apiKey: keys.MAILGUN_API_KEY, domain: keys.mailgunDomain});
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
