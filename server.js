@@ -14,7 +14,7 @@ console.log('Server listening on port 3000');
 
 app.post('/sendEmail', function(req, res) {
   var fromEmail = new helper.Email(req.body.from);
-  /* Line 19 provides incorrect data for the 'from' email field. Use it in place of line 17 if you'd like to see how the server handles SendGrid errors */
+  /* Line 18 provides incorrect data for the 'from' email field. Use it in place of line 16 if you'd like to see how the server handles SendGrid errors */
   //var fromEmail = new helper.Email(req.from);
   var toEmail = new helper.Email(req.body.to);
   var subject = req.body.subject;
